@@ -2,7 +2,7 @@ import pygame as pg
 from settings import *
 
 class SpriteObject:
-    def __init__(self, game, path='resources/sprites/static_sprites/candlebra.png', pos=(10.5, 3.5)): #88
+    def __init__(self, game, path='resources/sprites/static_sprites/candlebra.png', pos=(10.5, 3.5), scale=1.0, shift=0.0): #88 #98 added scale and shift
         self.game = game
         self.player = game.player
         self.x, self.y = pos
@@ -12,16 +12,18 @@ class SpriteObject:
         self.IMAGE_RATIO = self.IMAGE_WIDTH / self.image.get_height() #93
         self.dx, self.dy, self.theta, self.screen_x, self.dist, self.norm_dist = 0, 0, 0, 0, 1, 1 #94
         self.sprite_half_width = 0 #94
+        self.SPRITE_SCALE = scale #98
+        self.SPRITE_HEIGHT_SHIFT = shift #98
 
     def get_sprite_projection(self): #92
-        proj = SCREEN_DIST / self.norm_dist * self.SPRITE_SCALE
+        proj = SCREEN_DIST / self.norm_dist * self.SPRITE_SCALE #98
         proj_width, proj_height = proj * self.IMAGE_RATIO, proj
 
         image = pg.transform.scale(self.image, (proj_width, proj_height)) #scale image to calc position size
 
         self.sprite_half_width = proj_width // 2
-        height_shift = proj_height * self.SPRITE_HEIGHT_SHIFT 
-        pos = self.screen_x - self.sprite_half_width, HALF_HEIGHT - proj_height // 2 + height_shift
+        height_shift = proj_height * self.SPRITE_HEIGHT_SHIFT #99
+        pos = self.screen_x - self.sprite_half_width, HALF_HEIGHT - proj_height // 2 + height_shift ##98 added height_shift
 
         self.game.raycasting.objects_to_render.append((self.norm_dist, image, pos)) #92 #add sprite to array of walls from raycasting
 

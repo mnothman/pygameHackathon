@@ -23,7 +23,7 @@ class ObjectRenderer: #60
         pg.draw.rect(self.screen, FLOOR_COLOR, (0, HALF_HEIGHT, WIDTH, HEIGHT)) #86
 
     def render_game_objects(self): #72
-        list_objects = sorted(self.game.raycasting.objects_to_render, key=lambda t: t[0], reverse=True)
+        list_objects = sorted(self.game.raycasting.objects_to_render, key=lambda t: t[0], reverse=True) #97 #need to sort in tuple so that sprites dont go through walls
         for depth, image, pos in list_objects:
             self.screen.blit(image, pos) #72
 

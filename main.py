@@ -14,7 +14,7 @@ class Game:
         pg.init()
         pg.mouse.set_visible(False)
         self.screen = pg.display.set_mode(RES)
-       # pg.event.set_grab(True) #mouse fix 
+        #pg.event.set_grab(True) #mouse fix supposedly, but doesn't allow mouse movement after grabbing
         self.clock = pg.time.Clock()
         self.delta_time = 1 #26
         self.new_game() #17
