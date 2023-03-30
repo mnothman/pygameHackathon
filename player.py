@@ -35,19 +35,20 @@ class Player: #21
         #self.x += dx #idk what this does
         #self.y += dy #idk what this does
 
-        if keys[pg.K_LEFT]: #31
-            self.angle -= PLAYER_ROT_SPEED * self.game.delta_time 
-        if keys[pg.K_RIGHT]:
-            self.angle += PLAYER_ROT_SPEED * self.game.delta_time 
-        self.angle %= math.tau #31
+        #if keys[pg.K_LEFT]: #31 #82
+        #   self.angle -= PLAYER_ROT_SPEED * self.game.delta_time  #82
+        #if keys[pg.K_RIGHT]: #82
+        #    self.angle += PLAYER_ROT_SPEED * self.game.delta_time  #82
+        self.angle %= math.tau #31 keep here 
 
     def check_wall(self, x, y): #36
         return (x, y) not in self.game.map.world_map #36
     
     def check_wall_collision(self, dx, dy): #37
-        if self.check_wall(int(self.x + dx), int(self.y)):
+        scale = PLAYER_SIZE_SCALE / self.game.delta_time #77
+        if self.check_wall(int(self.x + dx * scale), int(self.y)): #77 added * scale
             self.x += dx
-        if self.check_wall(int(self.x), int(self.y + dy)):
+        if self.check_wall(int(self.x), int(self.y + dy * scale)): #77 added * scale
             self.y += dy #37
 
 
@@ -57,10 +58,18 @@ class Player: #21
                      self.y * 100 + WIDTH * math. sin(self.angle)), 2)
         pg.draw.circle(self.game.screen, 'green', (self.x * 100, self.y * 100), 15) #32
 
-
+    def mouse_control(self): #79
+        mx, my = pg.mouse.get_pos() #79
+        if mx < MOUSE_BORDER_LEFT or mx > MOUSE_BORDER_RIGHT: #80
+            pg.mouse.set_pos([HALF_WIDTH, HALF_HEIGHT])
+        self.rel = pg.mouse.get_rel()[0]
+        self.rel = max(-MOUSE_MAX_REL, min(MOUSE_MAX_REL, self.rel))
+        self.angle += self.rel * MOUSE_SENSITIVITY * self.game.delta_time
 
     def update(self): #23
         self.movement() #23
+        self.mouse_control() #81
+
 
     @property #24
     def pos(self):
