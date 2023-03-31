@@ -1,5 +1,7 @@
 import pygame as pg
 from settings import *
+import os #100
+from collections import deque #100
 
 class SpriteObject:
     def __init__(self, game, path='resources/sprites/static_sprites/candlebra.png', pos=(10.5, 3.5), scale=1.0, shift=0.0): #88 #98 added scale and shift
@@ -48,3 +50,39 @@ class SpriteObject:
     def update(self): #90
         self.get_sprite() #90
         
+
+class AnimatedSprite(SpriteObject): #100
+    def __init__(self, game, path='resources/sprites/animated_sprites/green_light/0.png',
+                 pos=(11.5, 3.5), scale=0.8, shift=0.16, animation_time=120):
+        super().__init__(game, path, pos, scale, shift)
+        self.animation_time = animation_time
+        self.path = path.rsplit('/', 1)[0] #101 get path to folder with sprites in them 
+        self.images = self.get_images(self.path) #101 load with get images
+        self.animation_time_prev = pg.time.get_ticks() #103
+        self.animation_trigger = False #103
+
+    def update(self): #106
+        super().update()
+        self.check_animation_time()
+        self.animate(self.images)
+
+    def animate(self, images): #105
+        if self.animation_trigger:
+            images.rotate(-1)
+            self.image = images[0] #105
+
+    def check_animation_time(self): #104
+        self.animation_trigger = False
+        time_now = pg.time.get_ticks()
+        if time_now - self.animation_time_prev > self.animation_time:
+            self.animation_time_prev = time_now
+            self.animation_trigger = True #104
+
+
+    def get_images(self, path): #102, download images then place in queue
+        images = deque()
+        for file_name in os.listdir(path):
+            if os.path.isfile(os.path.join(path, file_name)):
+                img = pg.image.load(path + '/' + file_name).convert_alpha()
+                images.append(img)
+        return images
