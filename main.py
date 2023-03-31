@@ -6,6 +6,7 @@ from player import * #33
 from raycasting import * #52
 from object_renderer import * #64
 from sprite_object import * #95
+from object_handler import * #111
 
 
 #3
@@ -14,7 +15,7 @@ class Game:
         pg.init()
         pg.mouse.set_visible(False)
         self.screen = pg.display.set_mode(RES)
-       # pg.event.set_grab(True) #mouse fix 
+        #pg.event.set_grab(True) #mouse fix supposedly, but doesn't allow mouse movement after grabbing
         self.clock = pg.time.Clock()
         self.delta_time = 1 #26
         self.new_game() #17
@@ -25,12 +26,18 @@ class Game:
         self.player = Player(self) #34
         self.object_renderer = ObjectRenderer(self)
         self.raycasting = RayCasting(self) #52
-        self.static_sprite = SpriteObject(self) #96
+        #self.static_sprite = SpriteObject(self) #96
+        #self.animated_sprite = AnimatedSprite(self) #107
+        self.object_handler = ObjectHandler(self) #111
+
+
 
     def update(self): #5
         self.player.update() #34
         self.raycasting.update() #52
-        self.static_sprite.update() #96
+        self.object_handler.update()
+        #self.static_sprite.update() #96
+        #self.animated_sprite.update() #107
         pg.display.flip()
         self.delta_time = self.clock.tick(FPS)
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}') #update screen and show fps in window caption
