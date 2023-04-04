@@ -16,7 +16,7 @@ class RayCasting: #39
 
             if proj_height < HEIGHT: #75
                 wall_column = self.textures[texture].subsurface( #70
-                        offset * (TEXTURE_SIZE - SCALE), 0, SCALE, TEXTURE_SIZE #70
+                        offset * (TEXTURE_SIZE - SCALE), 0, SCALE, TEXTURE_SIZE #70 was scale instead of 200
                 ) #70
                 wall_column = pg.transform.scale(wall_column, (SCALE, proj_height)) #70
                 wall_pos = (ray * SCALE, HALF_HEIGHT - proj_height // 2) #70

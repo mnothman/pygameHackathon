@@ -7,6 +7,10 @@ from raycasting import * #52
 from object_renderer import * #64
 from sprite_object import * #95
 from object_handler import * #111
+from sound import *
+
+#If the mouse cursor is hidden, and input is grabbed to the current display the mouse will enter a virtual input mode, where the relative movements of the mouse will never be stopped by the borders of the screen. See the functions pygame.mouse.set_visible() and pygame.event.set_grab() to get this configured.
+
 
 
 #3
@@ -29,6 +33,9 @@ class Game:
         #self.static_sprite = SpriteObject(self) #96
         #self.animated_sprite = AnimatedSprite(self) #107
         self.object_handler = ObjectHandler(self) #111
+        self.sound = Sound(self) 
+    #    self.pathfinding = PathFinding(self) need later
+        #pg.mixer.music.play(-1)
 
 
 
@@ -44,7 +51,7 @@ class Game:
 
 
     def draw(self): #6
-        #self.screen.fill('black') no need to fill with black when we have floor and sky
+        #self.screen.fill('black') #no need to fill with black when we have floor and sky. for 2D
         self.object_renderer.draw() #74
         #self.map.draw() #18 commented 2D
         #self.player.draw() #34 commented 2D
