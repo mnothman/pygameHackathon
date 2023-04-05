@@ -8,9 +8,10 @@ FPS = 0 #35
 
 PLAYER_POS = 1.5, 5 #19 mini_map
 PLAYER_ANGLE = 0 
-PLAYER_SPEED = 0.004 #NEW: make ability to change this when the player picks speed up item
+PLAYER_SPEED = 0.002 #NEW: make ability to change this when the player picks speed up item
 PLAYER_ROT_SPEED = 0.002
 PLAYER_SIZE_SCALE = 60 #76
+PLAYER_MAX_HEALTH = 100
 
 MOUSE_SENSITIVITY = 0.0003 #78
 MOUSE_MAX_REL = 40 #78 raising this allows for more rotation, was 40
