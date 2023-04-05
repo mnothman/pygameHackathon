@@ -8,11 +8,11 @@ class NPC(AnimatedSprite):
         self.idle_images = self.get_images(self.path + '/idle')
         self.walk_images = self.get_images(self.path + '/walk')
 
-        self.attack_dist = randint(3, 6) #change this to change the attack distance to melee range
-        self.speed = 0.03
-        self.size = 20
-        self.attack_damage = 10
-        self.accuracy = 0.15
+        self.attack_dist = randint(2, 2) #change this to change the attack distance to melee range
+        self.speed = 0.01
+        self.size = 10
+        self.attack_damage = 8
+        self.accuracy = 0.10
         self.alive = True
         self.ray_cast_value = False
         self.frame_counter = 0
@@ -30,12 +30,20 @@ class NPC(AnimatedSprite):
 
             if self.ray_cast_value:
                 self.player_search_trigger = True
-                self.animate(self.walk_images)
-                self.movement()
+
+                if self.dist < self.attack_dist: #only attack when distance to player smaller than atk distance
+                    self.attack()
+                else:
+                    self.animate(self.walk_images)
+                    self.movement()
+                    self.game.sound.spooky.play() #add into sounds
+                    self.game.object_renderer.static_screen2() #static screen call
+
 
             elif self.player_search_trigger:
                 self.animate(self.walk_images)
                 self.movement()
+                #add in sound here the jobro 
 
             else:
                 self.animate(self.idle_images)
@@ -56,7 +64,7 @@ class NPC(AnimatedSprite):
             self.y += dy
 
     def movement(self):
-        next_pos = self.game.player.map_pos
+        next_pos = self.game.pathfinding.get_path(self.map_pos, self.game.player.map_pos)
         next_x, next_y = next_pos
         angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
         dx = math.cos(angle) * self.speed
@@ -64,6 +72,11 @@ class NPC(AnimatedSprite):
         self.check_wall_collision(dx, dy)
 
 
+    def attack(self):
+        if self.animation_trigger:
+            self.game.sound.npc_shot.play() #make it to where a sound is played when slender hits, ADD TO SOUND FILE
+            if random() < self.accuracy:
+                self.game.player.get_damage(self.attack_damage) #for player to take damage
 
     def ray_cast_player_npc(self):
         if self.game.player.map_pos == self.map_pos: #check if in same tile

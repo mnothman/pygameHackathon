@@ -16,13 +16,13 @@ class ObjectHandler: #108
         #sprite map ADD AROUND SPRITES AND WHAT NOT 
         add_sprite(SpriteObject(game, path=self.static_sprite_path + 'candlebra.png', pos=(1,1))) #109
         add_sprite(SpriteObject(game, path=self.static_sprite_path + '1.png', pos=(1,1))) #109        
-        add_sprite(SpriteObject(game, path=self.static_sprite_path + '2.png', pos=(2,2))) #109        
-        add_sprite(SpriteObject(game, path=self.static_sprite_path + '3.png', pos=(3,3))) #109        
-        add_sprite(SpriteObject(game, path=self.static_sprite_path + '4.png', pos=(4,4))) #109        
-        add_sprite(SpriteObject(game, path=self.static_sprite_path + '5.png', pos=(5,5))) #109        
-        add_sprite(SpriteObject(game, path=self.static_sprite_path + '6.png', pos=(6,6))) #109        
-        add_sprite(SpriteObject(game, path=self.static_sprite_path + '7.png', pos=(7,7))) #109        
-        add_sprite(SpriteObject(game, path=self.static_sprite_path + '8.png', pos=(8,8))) #109        
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + '2.png', pos=(2,7))) #109        
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + '3.png', pos=(5,3))) #109        
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + '4.png', pos=(7,4))) #109        
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + '5.png', pos=(14,2))) #109        
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + '6.png', pos=(16,6))) #109        
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + '7.png', pos=(7,1.5))) #109        
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + '8.png', pos=(4,8))) #109        
 
         add_sprite(AnimatedSprite(game)) #109
         add_sprite(AnimatedSprite(game, pos=(1.5, 1.5)))

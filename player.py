@@ -7,6 +7,10 @@ class Player: #21
         self.game = game
         self.x, self.y = PLAYER_POS
         self.angle = PLAYER_ANGLE
+        self.health = PLAYER_MAX_HEALTH
+        self.rel = 0
+        self.health_recovery_delay = 700
+        self.time_prev = pg.time.get_ticks()
 
     def movement(self): #22
         sin_a = math.sin(self.angle) #25
@@ -30,7 +34,6 @@ class Player: #21
             dx += -speed_sin
             dy += speed_cos #30
   
-
         self.check_wall_collision(dx,dy)
         #self.x += dx #idk what this does
         #self.y += dy #idk what this does
@@ -40,6 +43,12 @@ class Player: #21
         #if keys[pg.K_RIGHT]: #82
         #    self.angle += PLAYER_ROT_SPEED * self.game.delta_time  #82
         self.angle %= math.tau #31 keep here 
+
+    def get_damage(self, damage): #player taking dmg
+        self.health -= damage
+        self.game.object_renderer.player_damage()
+        self.game.sound.player_pain.play()
+        self.check_game_over() #call from earlier
 
     def check_wall(self, x, y): #36
         return (x, y) not in self.game.map.world_map #36
@@ -51,6 +60,22 @@ class Player: #21
         if self.check_wall(int(self.x), int(self.y + dy * scale)): #77 added * scale
             self.y += dy #37
 
+    def check_game_over(self):
+        if self.health < 1:
+            self.game.object_renderer.game_over()
+            pg.display.flip()
+            pg.time.delay(1500)
+            self.game.new_game()
+    
+    def recover_health(self):
+        if self.check_health_recovery_delay() and self.health < PLAYER_MAX_HEALTH:
+            self.health += 1
+
+    def check_health_recovery_delay(self):
+        time_now = pg.time.get_ticks()
+        if time_now - self.time_prev > self.health_recovery_delay:
+            self.time_prev = time_now
+            return True
 
     def draw(self): #32
         pg.draw.line(self.game.screen, 'yellow', (self.x * 100, self.y * 100),
@@ -69,7 +94,7 @@ class Player: #21
     def update(self): #23
         self.movement() #23
         self.mouse_control() #81
-
+        self.recover_health()
 
     @property #24
     def pos(self):
