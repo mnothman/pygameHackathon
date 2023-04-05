@@ -16,7 +16,7 @@ class NPC(AnimatedSprite):
         self.alive = True
         self.ray_cast_value = False
         self.frame_counter = 0
-
+        self.player_search_trigger = False
 
     def update(self):
         self.check_animation_time()
@@ -27,11 +27,43 @@ class NPC(AnimatedSprite):
     def run_logic(self):
         if self.alive:
             self.ray_cast_value = self.ray_cast_player_npc()
-            self.animate(self.idle_images)
+
+            if self.ray_cast_value:
+                self.player_search_trigger = True
+                self.animate(self.walk_images)
+                self.movement()
+
+            elif self.player_search_trigger:
+                self.animate(self.walk_images)
+                self.movement()
+
+            else:
+                self.animate(self.idle_images)
+
+
 
     @property #so they cant get hit thru walls, need raycast 
     def map_pos(self):
         return int(self.x), int(self.y)
+
+    def check_wall(self, x, y):
+        return (x, y) not in self.game.map.world_map
+
+    def check_wall_collision(self, dx, dy):
+        if self.check_wall(int(self.x + dx * self.size), int(self.y)):
+            self.x += dx
+        if self.check_wall(int(self.x), int(self.y + dy * self.size)):
+            self.y += dy
+
+    def movement(self):
+        next_pos = self.game.player.map_pos
+        next_x, next_y = next_pos
+        angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
+        dx = math.cos(angle) * self.speed
+        dy = math.sin(angle) * self.speed
+        self.check_wall_collision(dx, dy)
+
+
 
     def ray_cast_player_npc(self):
         if self.game.player.map_pos == self.map_pos: #check if in same tile
