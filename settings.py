@@ -18,7 +18,7 @@ MOUSE_MAX_REL = 40 #78 raising this allows for more rotation, was 40
 MOUSE_BORDER_LEFT = 100 #78
 MOUSE_BORDER_RIGHT = WIDTH - MOUSE_BORDER_LEFT #78
 
-FLOOR_COLOR = (30, 30, 30) #84
+FLOOR_COLOR = (20, 20, 20) #84
 
 FOV = math.pi / 3 #42
 HALF_FOV = FOV / 2

@@ -1,6 +1,6 @@
 from sprite_object import *
 from random import randint, random, choice
-
+from sound import *
 
 class NPC(AnimatedSprite):
     def __init__(self, game, path='resources/sprites/npc/slender/walk.png', pos=(10.5, 5.5), scale=1, shift=0.16, animation_time=.5):
@@ -32,12 +32,14 @@ class NPC(AnimatedSprite):
                 self.player_search_trigger = True
 
                 if self.dist < self.attack_dist: #only attack when distance to player smaller than atk distance
+                    self.game.sound.npc_attack2.play() #doesnt work? worked yesterday
                     self.attack()
+                    #self.game.sound.npc_attack2.play() #doesnt work? worked yesterday
                 else:
                     self.animate(self.walk_images)
                     self.movement()
                     self.game.sound.spooky.play() #add into sounds
-                    self.game.object_renderer.static_screen2() #static screen call
+                    self.game.object_renderer.static_screen2() #static screen call uncomment
 
 
             elif self.player_search_trigger:
@@ -74,9 +76,10 @@ class NPC(AnimatedSprite):
 
     def attack(self):
         if self.animation_trigger:
-            self.game.sound.npc_shot.play() #make it to where a sound is played when slender hits, ADD TO SOUND FILE
+           # self.game.sound.npc_attack2.play() #instead of having attack sound here, have it to where when hes able to attack you he hits, instead of repeatedly screaming
             if random() < self.accuracy:
                 self.game.player.get_damage(self.attack_damage) #for player to take damage
+                self.game.sound.npc_attack2.play()
 
     def ray_cast_player_npc(self):
         if self.game.player.map_pos == self.map_pos: #check if in same tile

@@ -1,6 +1,6 @@
 import pygame as pg #59
 from settings import * #59
-
+from sound import *
 
 class ObjectRenderer: #60
     def __init__(self, game):
@@ -19,7 +19,7 @@ class ObjectRenderer: #60
 
     def game_over(self):
         self.screen.blit(self.game_over_image, (0,0))
-
+        self.game.sound.staticlight2.play()#not sure if works or not
 
     def draw(self): #73
         self.draw_background() #87
