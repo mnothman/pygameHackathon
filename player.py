@@ -38,11 +38,11 @@ class Player: #21
         #self.x += dx #idk what this does
         #self.y += dy #idk what this does
 
-        #if keys[pg.K_LEFT]: #31 #82
-        #   self.angle -= PLAYER_ROT_SPEED * self.game.delta_time  #82
-        #if keys[pg.K_RIGHT]: #82
-        #    self.angle += PLAYER_ROT_SPEED * self.game.delta_time  #82
-        self.angle %= math.tau #31 keep here 
+        if keys[pg.K_LEFT]: #31 #82 these 4 were commented
+           self.angle -= PLAYER_ROT_SPEED * self.game.delta_time  #82
+        if keys[pg.K_RIGHT]: #82
+            self.angle += PLAYER_ROT_SPEED * self.game.delta_time  #82
+        self.angle %= math.tau #31 keep here dont comment 
 
     def get_damage(self, damage): #player taking dmg
         self.health -= damage
@@ -102,4 +102,4 @@ class Player: #21
 
     @property #24
     def map_pos(self):
-        return int(self.x), int(self.y)
+        return int(self.x), int(self.y) #make it to where if your health is below a certain level u do the breathing sound

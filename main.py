@@ -35,7 +35,7 @@ class Game:
         self.object_handler = ObjectHandler(self) #111
         self.sound = Sound(self) 
         self.pathfinding = PathFinding(self) 
-        #pg.mixer.music.play(-1)
+        #pg.mixer.music.play(-1) #maybe comment out 
 
 
 
