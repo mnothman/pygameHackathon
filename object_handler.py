@@ -26,10 +26,16 @@ class ObjectHandler: #108
         add_sprite(SpriteObject(game, path=self.static_sprite_path + '7.png', pos=(7,1.5))) #109         GOOD NO NO NO
         add_sprite(SpriteObject(game, path=self.static_sprite_path + '8.png', pos=(18,30))) #109      GOOD   IT FOLLOWS
 
-        add_sprite(SpriteObject(game, path=self.static_sprite_path + 'tree.png', pos=(1.25,1.25), scale=2, shift = -0.15)) #109      SMALL TREE
-        add_sprite(SpriteObject(game, path=self.static_sprite_path + 'tree.png', pos=(3.25,3.25), scale=4, shift = -0.30)) #109      BIG TREE
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + 'tree.png', pos=(1.25,1.25), scale=2, shift = -0.15)) #      SMALL TREE GOOD
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + 'tree.png', pos=(3,3.25), scale=4, shift = -0.30)) #      BIG TREE GOOD
 
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + 'tree.png', pos=(10.5,10), scale=2, shift = -0.15)) #      SMALL TREE GOOD
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + 'tree.png', pos=(18.5 ,10), scale=2, shift = -0.15)) #      SMALL TREE GOOD
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + 'tree.png', pos=(2.75,18), scale=2, shift = -0.15)) #      SMALL TREE GOOD
 
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + 'tree.png', pos=(3,20.25), scale=4, shift = -0.30)) #109      BIG TREE GOOD
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + 'tree.png', pos=(18.5,28.25), scale=4, shift = -0.30)) #109      BIG TREE GOOD
+        add_sprite(SpriteObject(game, path=self.static_sprite_path + 'tree.png', pos=(8,13), scale=4, shift = -0.30)) #109      BIG TREE
 
 
         add_sprite(AnimatedSprite(game)) #109
