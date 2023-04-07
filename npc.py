@@ -9,7 +9,7 @@ class NPC(AnimatedSprite):
         self.walk_images = self.get_images(self.path + '/walk')
 
         self.attack_dist = randint(2, 2) #change this to change the attack distance to melee range
-        self.speed = 0.01
+        self.speed = 0.02
         self.size = 10
         self.attack_damage = 8
         self.accuracy = 0.10

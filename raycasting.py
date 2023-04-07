@@ -104,7 +104,7 @@ class RayCasting: #39
              #           (100 * ox + 100 * depth * cos_a, 100 * oy  + 100 * depth * sin_a), 2)
 
             # projection
-            proj_height = SCREEN_DIST / (depth + 0.0001) #54
+            proj_height = SCREEN_DIST / (depth + 0.0001) #54 CHANGES HEIGHT OF THE WALL
 
             #draw walls #55 REMOVED AFTER #67 ALONG WITH OLD DEPTH ABOVE
             #color = [255 / (1 + depth ** 5 * 0.00002)] * 3 #56

@@ -57,9 +57,12 @@ class ObjectRenderer: #60
     
     def load_wall_textures(self): #62
         return {
-            1: self.get_texture('resources/textures/peakpx.jpg'),
+            1: self.get_texture('resources/textures/High_resolution_wallpaper_background_ID_77701025437.jpg'), #wall background
             2: self.get_texture('resources/textures/2.png'),
             3: self.get_texture('resources/textures/3.png'),
             4: self.get_texture('resources/textures/4.png'),
             5: self.get_texture('resources/textures/5.png'),
+            #6: self.get_texture('resources/textures/6.png'),
+            #7: self.get_texture('resources/textures/7.png'),
+            #8: self.get_texture('resources/textures/8.png'),
         }
